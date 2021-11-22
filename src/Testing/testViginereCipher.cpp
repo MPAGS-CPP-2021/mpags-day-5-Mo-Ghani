@@ -10,21 +10,18 @@
 TEST_CASE("Viginere Cipher encryption/decryption", "[viginere]")
 {
     // test default
-    ViginereCipher vc{""};
-    std::string outputText = vc.applyCipher("HELLOWORLD",
-                                            CipherMode::Encrypt); 
+    ViginereCipher vcNoKey{""};
+    std::string outputText = vcNoKey.applyCipher("HELLOWORLD", 
+                                                 CipherMode::Encrypt); 
     REQUIRE(outputText == "HELLOWORLD");
 
     // test encryption with key
     ViginereCipher vc{"key"};
-    std::string outputText = vc.applyCipher("HELLOWORLD",
-                                            CipherMode::Encrypt);
+    outputText = vc.applyCipher("HELLOWORLD", CipherMode::Encrypt);
     REQUIRE(outputText == "RIJVSUYVJN");
 
     // test decryption with key
-    ViginereCipher vc{"key"};
-    std::string outputText = vc.applyCipher("RIJVSUYVJN",
-                                            CipherMode::Encrypt);
+    outputText = vc.applyCipher("RIJVSUYVJN", CipherMode::Decrypt);
     REQUIRE(outputText == "HELLOWORLD");
 
 }
